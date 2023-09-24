@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import { Child1 } from './components/Child1';
 // import { Child2 } from './components/Child2';
 
-const Child1 = lazy(() => import("./components/Child1"))
-const Child2 = lazy(() => import('./components/Child2'))
+const Child1 = lazy(() => import("./components/Child1").then(module => ({default: module.Child1})))
+const Child2 = lazy(() => import('./components/Child2').then(module => ({default: module.Child2})))
 
 function App() {
   return (
