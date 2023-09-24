@@ -2,7 +2,7 @@ import React from 'react'
 
 const loop = () => {
   let i = 0
-  while (i < 10000000000) i++;
+  while (i < 1000000000) i++;
   console.log(i);
 };
 
