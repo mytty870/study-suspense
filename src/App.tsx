@@ -1,31 +1,24 @@
-import React, { Suspense, useState } from 'react';
-import logo from './logo.svg';
+import React, { Suspense, lazy } from 'react';
 import './App.css';
-// import { AlwaysSuspend } from './components/AlwaysSuspend';
-import { SometimesSuspend } from './components/SometimesSuspend';
-import { RenderingNotifier } from './components/RenderingNotifier';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// import { Child1 } from './components/Child1';
+// import { Child2 } from './components/Child2';
+
+const Child1 = lazy(() => import("./components/Child1").then(module => ({default: module.Child1})))
+const Child2 = lazy(() => import('./components/Child2').then(module => ({default: module.Child2})))
 
 function App() {
-  const [count, setCount] = useState(0)
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="text-center">
-          <h1 className="text-2xl">React App</h1>
-          <RenderingNotifier name="outside"/>
-          <Suspense fallback={<p>Loading...</p>}>
-            <p>表示されるかな？</p>
-
-            {/* <AlwaysSuspend /> */}
-            <SometimesSuspend />
-            <RenderingNotifier name="inside"/>
-            <button type='button' className='border p-1' onClick={() => setCount(count + 1)}>add</button>
-            <p>{count}</p>
-          </Suspense>
-          <p>ここは表示される</p>
-        </div>
-      </header>
-    </div>
+    <>
+    <Suspense fallback={<div>loading...</div>}>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Child1 />}/>
+        <Route path='child2' element={<Child2 />}/>
+      </Routes>
+    </BrowserRouter>
+    </Suspense>
+    </>
   );
 }
 
