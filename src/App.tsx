@@ -1,28 +1,16 @@
-import React, { Suspense, useState } from 'react';
-import logo from './logo.svg';
+import React, { Suspense } from 'react';
 import './App.css';
-// import { AlwaysSuspend } from './components/AlwaysSuspend';
-import { SometimesSuspend } from './components/SometimesSuspend';
-import { RenderingNotifier } from './components/RenderingNotifier';
+import { DataLoader } from './components/DataLoader';
 
 function App() {
-  const [count, setCount] = useState(0)
   return (
     <div className="App">
       <header className="App-header">
         <div className="text-center">
           <h1 className="text-2xl">React App</h1>
-          <RenderingNotifier name="outside"/>
           <Suspense fallback={<p>Loading...</p>}>
-            <p>表示されるかな？</p>
-
-            {/* <AlwaysSuspend /> */}
-            <SometimesSuspend />
-            <RenderingNotifier name="inside"/>
-            <button type='button' className='border p-1' onClick={() => setCount(count + 1)}>add</button>
-            <p>{count}</p>
+            <DataLoader />
           </Suspense>
-          <p>ここは表示される</p>
         </div>
       </header>
     </div>
